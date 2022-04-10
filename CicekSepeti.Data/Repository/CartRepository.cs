@@ -18,51 +18,51 @@ namespace CicekSepeti.Data.Repository
         {
             _context = context;
         }
-        public async Task<BasketProduct> AddBasketProduct(BasketProduct basketProduct)
+        public async Task<Cart> AddCart(Cart cart)
         {
 
-            if (_context.Cart.Contains(basketProduct))
+            if (_context.Cart.Contains(cart))
             {
                 return default;
             }
-            // Add the new basket product,
-            _context.Cart.Add(basketProduct);
+            // Add the new Cart,
+            _context.Cart.Add(cart);
 
             await _context.SaveChangesAsync();
 
-            return basketProduct;
+            return cart;
         }
 
-        public async Task<BasketProduct> DeleteBasketProduct(int basketProductId)
+        public async Task<Cart> DeleteCart(string cartId)
         {
-            BasketProduct basketProduct = await _context.Cart.FindAsync(basketProductId);
-            if (basketProduct != null)
+            Cart cart = await _context.Cart.FindAsync(cartId);
+            if (cart != null)
             {
-                // Delete the basket product from the basket product table
-                _context.Remove(basketProduct);
+                // Delete the Cart from the Cart table
+                _context.Remove(cart);
 
                 // Save DB changes
                 _context.SaveChanges();
             }
-            return basketProduct;
+            return cart;
         }
 
-        public async Task<List<BasketProduct>> GetAllBasketProduct()
+        public async Task<List<Cart>> GetAllCart()
         {
             
             return await _context.Cart.ToListAsync();
         }
 
-        public async Task<BasketProduct> GetBasketProduct(int basketProductId)
+        public async Task<Cart> GetCart(string guidCartId)
         {
-            return await _context.Cart.FirstOrDefaultAsync(p => p.Product.Id.Equals(basketProductId));
+            return await _context.Cart.FirstOrDefaultAsync(p => p.CartGuid.Equals(guidCartId));
         }
 
-        public async Task<BasketProduct> UpdateBasketProduct(BasketProduct basketProduct)
+        public async Task<Cart> UpdateCart(Cart cart)
         {
-            _context.Cart.Update(basketProduct);
+            _context.Cart.Update(cart);
             await _context.SaveChangesAsync();
-            return basketProduct;
+            return cart;
         }
     }
 }

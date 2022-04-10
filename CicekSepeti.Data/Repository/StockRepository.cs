@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CicekSepeti.Data.Repository
 {
-    public class StockRepository : IProductRepository
+    public class StockRepository : IStockRepository
     {
         public readonly StockDbContext _context;
 
@@ -33,7 +33,7 @@ namespace CicekSepeti.Data.Repository
             return stock;
         }
 
-        public async Task<Stock> DeleteProduct(int stockId)
+        public async Task<Stock> DeleteStock(int stockId)
         {
             Stock stock = await _context.Stock.FindAsync(stockId);
             if (stock != null)
@@ -47,18 +47,18 @@ namespace CicekSepeti.Data.Repository
             return stock;
         }
 
-        public async Task<List<Stock>> GetAllProduct()
+        public async Task<List<Stock>> GetAllStock()
         {
             
             return await _context.Stock.ToListAsync();
         }
 
-        public async Task<Stock> GetProduct(int stockId)
+        public async Task<Stock> GetStock(int stockId)
         {
             return await _context.Stock.FirstOrDefaultAsync(p => p.Id.Equals(stockId));
         }
 
-        public async Task<Stock> UpdateProduct(Stock stock)
+        public async Task<Stock> UpdateStock(Stock stock)
         {
             _context.Stock.Update(stock);
             await _context.SaveChangesAsync();

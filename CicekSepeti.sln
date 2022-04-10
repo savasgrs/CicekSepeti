@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CicekSepeti.Test", "CicekSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicekSepeti.Data", "CicekSepeti.Data\CicekSepeti.Data.csproj", "{295EA336-5773-4AA2-AC8B-64933131F406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicekSepeti.Domain", "CicekSepeti.Domain\CicekSepeti.Domain.csproj", "{BA38760B-D260-480C-BC8D-49246026B111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{295EA336-5773-4AA2-AC8B-64933131F406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{295EA336-5773-4AA2-AC8B-64933131F406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{295EA336-5773-4AA2-AC8B-64933131F406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA38760B-D260-480C-BC8D-49246026B111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA38760B-D260-480C-BC8D-49246026B111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA38760B-D260-480C-BC8D-49246026B111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA38760B-D260-480C-BC8D-49246026B111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

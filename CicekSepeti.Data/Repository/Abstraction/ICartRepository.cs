@@ -8,13 +8,13 @@ namespace CicekSepeti.Data.Repository.Abstraction
 {
     public interface ICartRepository
     {
-        Task<List<BasketProduct>> GetAllBasketProduct();
-        Task<BasketProduct> GetBasketProduct(int basketProductId);
+        Task<List<Cart>> GetAllCart();
+        Task<Cart> GetCart(string guidCartId);
 
-        Task<BasketProduct> AddBasketProduct(BasketProduct basketProduct);
+        Task<Cart> AddCart(Cart cart);
 
-        Task<BasketProduct> UpdateBasketProduct(BasketProduct basketProduct);
+        Task<Cart> UpdateCart(Cart cart);
 
-        Task<BasketProduct> DeleteBasketProduct(int basketProductId);
+        Task<Cart> DeleteCart(string cartId);
     }
 }

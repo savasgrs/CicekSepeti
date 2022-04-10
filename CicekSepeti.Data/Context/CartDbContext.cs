@@ -13,7 +13,7 @@ namespace CicekSepetiCaseStudy.Data.Context
         {
         }
 
-        public DbSet<BasketProduct> Cart { get; set; }
+        public DbSet<Cart> Cart { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

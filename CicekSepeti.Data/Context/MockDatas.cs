@@ -18,12 +18,14 @@ namespace CicekSepetiCaseStudy.Data.Context
 
             using (var context = new CartDbContext(options))
             {
-                //New BasketProduct 
-                BasketProduct basketProduct;
+                //New Cart 
+                Cart cart;
+                Product product;
 
-                basketProduct = new BasketProduct();
-                basketProduct.BasketGuid = new Guid();
-                basketProduct.Product = new Product()
+                cart = new Cart();
+                cart.CartGuid = new Guid();
+                
+                product = new Product()
                 {
                     Id = 1,
                     Name = "ball",
@@ -34,14 +36,16 @@ namespace CicekSepetiCaseStudy.Data.Context
                     IsActive = true
                 };
 
+                cart.Products.Add(product);
+
+                context.Cart.Add(cart);
 
 
-                context.Cart.Add(basketProduct);
-
-                //New BasketProduct 
-                basketProduct = new BasketProduct();
-                basketProduct.BasketGuid = new Guid();
-                basketProduct.Product = new Product()
+                //New Cart 
+                cart = new Cart();
+                cart.CartGuid = new Guid();
+                
+                product = new Product()
                 {
                     Id = 2,
                     Name = "Tennis Racket",
@@ -52,13 +56,15 @@ namespace CicekSepetiCaseStudy.Data.Context
                     IsActive = true
                 };
 
+                cart.Products.Add(product);
 
-                context.Cart.Add(basketProduct);
+                context.Cart.Add(cart);
 
-                //New BasketProduct 
-                basketProduct = new BasketProduct();
-                basketProduct.BasketGuid = new Guid();
-                basketProduct.Product = new Product()
+
+                //New Cart 
+                cart = new Cart();
+                cart.CartGuid = new Guid();
+                product = new Product()
                 {
                     Id = 3,
                     Name = "T-Shirt",
@@ -69,9 +75,11 @@ namespace CicekSepetiCaseStudy.Data.Context
                     IsActive = true
                 };
 
-                context.Cart.Add(basketProduct);
+                cart.Products.Add(product);
 
-                //New BasketProducts DB add 
+                context.Cart.Add(cart);
+
+                //New Carts DB add 
                 context.SaveChanges();
             }
         }
