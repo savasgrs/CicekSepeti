@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicekSepeti.Api", "CicekSepeti.Api\CicekSepeti.Api.csproj", "{8076832C-A1E2-4332-B59B-B3E5A2E20720}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CicekSepeti.Api", "CicekSepeti.Api\CicekSepeti.Api.csproj", "{8076832C-A1E2-4332-B59B-B3E5A2E20720}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicekSepeti.Core", "CicekSepeti.Core\CicekSepeti.Core.csproj", "{7D1ABFF0-5478-4C3F-99AE-C7E3BA16AC53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CicekSepeti.Core", "CicekSepeti.Core\CicekSepeti.Core.csproj", "{7D1ABFF0-5478-4C3F-99AE-C7E3BA16AC53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicekSepeti.Data", "CicekSepeti.Data\CicekSepeti.Data.csproj", "{ED292AAD-2CB9-4E21-9582-D5234465683C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CicekSepeti.Test", "CicekSepeti.Test\CicekSepeti.Test.csproj", "{F0586B3A-8F81-41AA-A7C0-2D3B0D6F72D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicekSepeti.Test", "CicekSepeti.Test\CicekSepeti.Test.csproj", "{F0586B3A-8F81-41AA-A7C0-2D3B0D6F72D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CicekSepeti.Data", "CicekSepeti.Data\CicekSepeti.Data.csproj", "{295EA336-5773-4AA2-AC8B-64933131F406}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{7D1ABFF0-5478-4C3F-99AE-C7E3BA16AC53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D1ABFF0-5478-4C3F-99AE-C7E3BA16AC53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D1ABFF0-5478-4C3F-99AE-C7E3BA16AC53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED292AAD-2CB9-4E21-9582-D5234465683C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED292AAD-2CB9-4E21-9582-D5234465683C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED292AAD-2CB9-4E21-9582-D5234465683C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED292AAD-2CB9-4E21-9582-D5234465683C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0586B3A-8F81-41AA-A7C0-2D3B0D6F72D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0586B3A-8F81-41AA-A7C0-2D3B0D6F72D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0586B3A-8F81-41AA-A7C0-2D3B0D6F72D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0586B3A-8F81-41AA-A7C0-2D3B0D6F72D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{295EA336-5773-4AA2-AC8B-64933131F406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{295EA336-5773-4AA2-AC8B-64933131F406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{295EA336-5773-4AA2-AC8B-64933131F406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{295EA336-5773-4AA2-AC8B-64933131F406}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,9 @@
+using CicekSepetiCaseStudy.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +27,19 @@ namespace CicekSepeti.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CartDbContext>(opt =>
+                                                opt.UseInMemoryDatabase(
+                                                    databaseName: "cartDB"
+                                                    ));
+            services.AddDbContext<StockDbContext>(opt =>
+                                                 opt.UseInMemoryDatabase(
+                                                     databaseName: "productDB"
+                                                     ));
+            services.AddDbContext<StockDbContext>(opt =>
+                                                opt.UseInMemoryDatabase(
+                                                    databaseName: "stockDB"
+                                                    ));
+
             services.AddControllers();
         }
 
