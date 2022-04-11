@@ -24,12 +24,12 @@ namespace CicekSepeti.Test
             var options = new DbContextOptionsBuilder<CartDbContext>()
                              .UseInMemoryDatabase("testCartDb")
                              .Options;
+
             using (var context = new CartDbContext(options))
             {
                 testCartProduct = new Cart();
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
-
 
                 CartItem product = new CartItem()
                 {
@@ -38,22 +38,24 @@ namespace CicekSepeti.Test
                     Description = "sports goods are sold",
                     Price = (decimal)10.99,
                     CreateByUser = "1",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow
+                    CreateDateTime = DateTime.UtcNow,
+
                 };
 
+                testCartProduct.Quantity = 1;
+                testCartProduct.CartItemId = product.Id;
 
                 context.Cart.Add(testCartProduct);
                 context.SaveChanges();
             }
             using (var context = new CartDbContext(options))
             {
-                testCartProduct.Amount = testAmount;
-
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.GetCart(testCartProduct.CartGuid).Result.CartGuid, testCartProduct.CartGuid);
                 Assert.AreNotEqual(cartService.GetCart(testCartProduct.CartGuid).Result.CartGuid, -1);
             }
         }
+
         [TestMethod]
         public void GetAllProductsTest()
         {
@@ -78,20 +80,18 @@ namespace CicekSepeti.Test
                     Id = 2,
                     Name = "computer",
                     Description = "technologies goods are sold",
-                    Price = (decimal)1000.99,
+                    Price = (decimal)421.99,
                     CreateByUser = "1",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow
                 };
 
-
-
+                testCartProduct.Quantity = 1;
                 context.Cart.Add(testCartProduct);
                 context.SaveChanges();
             }
+
             using (var context = new CartDbContext(options))
             {
-                testCartProduct.Amount = testAmount;
-
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.GetAllCart().Result.Count(), context.Cart.Count());
                 Assert.AreNotEqual(cartService.GetAllCart().Result.Count(), -1);
@@ -103,7 +103,7 @@ namespace CicekSepeti.Test
         {
             Guid testGuid = new Guid();
             Cart testCartProduct;
-            decimal testAmount = (decimal)10.99;
+            decimal testAmount = (decimal)11.99;
 
             var options = new DbContextOptionsBuilder<CartDbContext>()
                              .UseInMemoryDatabase("testCartDb3")
@@ -114,7 +114,6 @@ namespace CicekSepeti.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-
                 CartItem product = new CartItem()
                 {
                     Id = 3,
@@ -122,16 +121,19 @@ namespace CicekSepeti.Test
                     Description = "sports goods are sold",
                     Price = (decimal)11.99,
                     CreateByUser = "1",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow
+                    CreateDateTime = DateTime.UtcNow,
+
                 };
+
+                testCartProduct.Quantity = 1;
+                testCartProduct.CartItemId = product.Id;
 
                 context.Cart.Add(testCartProduct);
                 context.SaveChanges();
             }
+
             using (var context = new CartDbContext(options))
             {
-                testCartProduct.Amount = testAmount;
-
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.AddCart(testCartProduct).Result, testCartProduct);
                 Assert.AreEqual(cartService.AddCart(testCartProduct).Result, null);
@@ -160,18 +162,20 @@ namespace CicekSepeti.Test
                     Id = 4,
                     Name = "suit",
                     Description = "sports goods are sold",
-                    Price = (decimal)8.99,
+                    Price = (decimal)19.99,
                     CreateByUser = "1",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow
                 };
 
+                testCartProduct.Quantity = 1;
+                testCartProduct.CartItemId = product.Id;
+
                 context.Cart.Add(testCartProduct);
                 context.SaveChanges();
             }
+
             using (var context = new CartDbContext(options))
             {
-                testCartProduct.Amount = testAmount;
-
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.UpdateCart(testCartProduct).Result, 1);
                 Assert.AreEqual(cartService.GetCart(testCartProduct.CartGuid).Result.Amount, testAmount);
@@ -206,16 +210,18 @@ namespace CicekSepeti.Test
                     CreateDateTime = DateTime.UtcNow
                 };
 
+                testCartProduct.Amount = (decimal)8.99;
+                testCartProduct.Quantity = 1;
+                testCartProduct.CartItemId = product.Id;
+
                 context.Cart.Add(testCartProduct);
                 context.SaveChanges();
             }
+
             using (var context = new CartDbContext(options))
             {
-                testCartProduct.Amount = testAmount;
-
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.DeleteCart(testCartProduct.CartGuid).Result, 1);
-
                 Assert.AreEqual(cartService.GetAllCart().Result.Count(), 0);
                 Assert.AreNotEqual(cartService.GetAllCart().Result.Count(), 1);
             }
