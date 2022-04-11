@@ -10,7 +10,7 @@ namespace CicekSepeti.Core
     {
         public Cart()
         {
-            CartItems = new List<CartItem>()
+            CartItems = new List<CartItem>();
         }
         [Key]
         public Guid CartGuid { get; set; }
