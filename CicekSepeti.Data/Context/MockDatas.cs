@@ -36,10 +36,10 @@ namespace CicekSepeti.Data.Context
                     CreateByUser = "1",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
+
                 cart.Quantity++;
                 cart.Amount = (decimal)10.99;
-
-                cart.CartItems.Add(product);
+                cart.CartItemId = product.Id;
 
                 context.Cart.Add(cart);
 
@@ -57,10 +57,10 @@ namespace CicekSepeti.Data.Context
                     CreateByUser = "2",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
+
                 cart.Quantity++;
                 cart.Amount = (decimal)20.99;
-
-                cart.CartItems.Add(product);
+                cart.CartItemId = product.Id;
 
                 context.Cart.Add(cart);
 
@@ -92,8 +92,7 @@ namespace CicekSepeti.Data.Context
                 };
                 cart.Quantity++;
                 cart.Amount = (decimal)30;
-
-                cart.CartItems.Add(product);
+                cart.CartItemId = product.Id;
 
 
                 context.Cart.Add(cart);

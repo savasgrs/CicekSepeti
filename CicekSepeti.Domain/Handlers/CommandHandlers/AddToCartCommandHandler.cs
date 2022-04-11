@@ -25,33 +25,29 @@ namespace CicekSepeti.Domain.Handlers.CommandHandlers
         {
             //get CartItems
             var cart = await _cartRepository.GetCart(command.CartGuid);
-            CartItem product;
 
+            CartItem product = await _productRepository.GetProduct(command.ProductId);
 
             if (cart != null)
             {
                 //if exist product
-                product = cart.CartItems.Where(d => d.Id == command.ProductId).FirstOrDefault();
-                product.Quantity++;
+                if (cart.CartItemId == command.ProductId)
+                {
+                    cart.Quantity++;
+                }
             }
             else// very first time adding the product to cart
             {
                 //new CartItem add
                 cart = new Cart();
-                cart.CartGuid = Guid.NewGuid();
-
-                product = await _productRepository.GetProduct(command.ProductId);
-                                
-                cart.CartItems.Add(product);
+                cart.CartGuid = Guid.NewGuid();                                
+                cart.CartItemId = product.Id;
 
                 await _cartRepository.AddCart(cart);
             }
 
-
-            foreach (CartItem productItem in cart.CartItems)
-            {
-                cart.Amount += productItem.Price;
-            }
+            cart.Amount += product.Price;
+                       
             await _cartRepository.AddCart(cart);
 
             return cart;
