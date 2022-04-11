@@ -18,7 +18,7 @@ namespace CicekSepeti.Data.Repository
         {
             _context = context;
         }
-        public async Task<Product> AddProduct(Product product)
+        public async Task<CartItem> AddProduct(CartItem product)
         {
 
             if (_context.Products.Contains(product))
@@ -33,9 +33,9 @@ namespace CicekSepeti.Data.Repository
             return product;
         }
 
-        public async Task<Product> DeleteProduct(int productId)
+        public async Task<CartItem> DeleteProduct(int productId)
         {
-            Product product = await _context.Products.FindAsync(productId);
+            CartItem product = await _context.Products.FindAsync(productId);
             if (product != null)
             {
                 // Delete the product from the product table
@@ -47,18 +47,18 @@ namespace CicekSepeti.Data.Repository
             return product;
         }
 
-        public async Task<List<Product>> GetAllProduct()
+        public async Task<List<CartItem>> GetAllProduct()
         {
             
             return await _context.Products.ToListAsync();
         }
 
-        public async Task<Product> GetProduct(int productId)
+        public async Task<CartItem> GetProduct(int productId)
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.Id.Equals(productId));
         }
 
-        public async Task<Product> UpdateProduct(Product product)
+        public async Task<CartItem> UpdateProduct(CartItem product)
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();

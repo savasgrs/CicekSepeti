@@ -30,17 +30,16 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                Product product;
+                CartItem product;
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 1,
                     Name = "ball",
                     Description = "sports goods are sold",
                     Price = (decimal)10.99,
                     CreateByUser = "1",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
+                    CreateDateTime = DateTime.UtcNow
                 };
 
 
@@ -52,8 +51,8 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.Amount = testAmount;
 
                 CartRepository cartService = new CartRepository(context);
-                Assert.AreEqual(cartService.GetCart(testCartProduct.CartGuid.ToString()).Result.CartGuid, testCartProduct.CartGuid);
-                Assert.AreNotEqual(cartService.GetCart(testCartProduct.CartGuid.ToString()).Result.CartGuid, -1);
+                Assert.AreEqual(cartService.GetCart(testCartProduct.CartGuid).Result.CartGuid, testCartProduct.CartGuid);
+                Assert.AreNotEqual(cartService.GetCart(testCartProduct.CartGuid).Result.CartGuid, -1);
             }
         }
         [TestMethod]
@@ -73,17 +72,16 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                Product product;
+                CartItem product;
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 2,
                     Name = "computer",
                     Description = "technologies goods are sold",
                     Price = (decimal)1000.99,
                     CreateByUser = "1",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
+                    CreateDateTime = DateTime.UtcNow
                 };
 
 
@@ -117,17 +115,16 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                Product product;
+                CartItem product;
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 3,
                     Name = "T-Shirt",
                     Description = "sports goods are sold",
                     Price = (decimal)11.99,
                     CreateByUser = "1",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
+                    CreateDateTime = DateTime.UtcNow
                 };
 
                 context.Cart.Add(testCartProduct);
@@ -159,17 +156,16 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                Product product;
+                CartItem product;
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 4,
                     Name = "suit",
                     Description = "sports goods are sold",
                     Price = (decimal)8.99,
                     CreateByUser = "1",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
+                    CreateDateTime = DateTime.UtcNow
                 };
 
                 context.Cart.Add(testCartProduct);
@@ -181,8 +177,8 @@ namespace CicekSepetiCaseStudy.Test
 
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.UpdateCart(testCartProduct).Result, 1);
-                Assert.AreEqual(cartService.GetCart(testCartProduct.CartGuid.ToString()).Result.Amount, testAmount);
-                Assert.AreNotEqual(cartService.GetCart(testCartProduct.CartGuid.ToString()).Result.Amount, -1);
+                Assert.AreEqual(cartService.GetCart(testCartProduct.CartGuid).Result.Amount, testAmount);
+                Assert.AreNotEqual(cartService.GetCart(testCartProduct.CartGuid).Result.Amount, -1);
             }
         }
 
@@ -202,17 +198,16 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                Product product;
+                CartItem product;
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 5,
                     Name = "ball",
                     Description = "sports goods are sold",
                     Price = (decimal)8.99,
                     CreateByUser = "1",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
+                    CreateDateTime = DateTime.UtcNow
                 };
 
                 context.Cart.Add(testCartProduct);
@@ -223,7 +218,7 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.Amount = testAmount;
 
                 CartRepository cartService = new CartRepository(context);
-                Assert.AreEqual(cartService.DeleteCart(testCartProduct.CartGuid.ToString()).Result, 1);
+                Assert.AreEqual(cartService.DeleteCart(testCartProduct.CartGuid).Result, 1);
 
                 Assert.AreEqual(cartService.GetAllCart().Result.Count(), 0);
                 Assert.AreNotEqual(cartService.GetAllCart().Result.Count(), 1);

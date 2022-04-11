@@ -6,9 +6,10 @@ using System.Text;
 
 namespace CicekSepeti.Data.Models.RequestModel
 {
-    public class AddToCartRequest : IRequest<Cart>
+    public class RemoveFromCartCommand : IRequest<int>
     {
-        public int ProductId { get; set; }
         public Guid CartGuid { get; set; }
+        public int ProductId { get; set; }
+        
     }
 }

@@ -33,7 +33,7 @@ namespace CicekSepeti.Data.Repository
             return cart;
         }
 
-        public async Task<Cart> DeleteCart(string cartId)
+        public async Task<Cart> DeleteCart(Guid cartId)
         {
             Cart cart = await _context.Cart.FindAsync(cartId);
             if (cart != null)
@@ -53,9 +53,14 @@ namespace CicekSepeti.Data.Repository
             return await _context.Cart.ToListAsync();
         }
 
-        public async Task<Cart> GetCart(string guidCartId)
+        public async Task<Cart> GetCart(Guid guidCartId)
         {
             return await _context.Cart.FirstOrDefaultAsync(p => p.CartGuid.Equals(guidCartId));
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<Cart> UpdateCart(Cart cart)

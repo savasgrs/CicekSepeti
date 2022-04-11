@@ -9,6 +9,9 @@ namespace CicekSepetiCaseStudy.Data.Context
 {
     public class MockDatas
     {
+        /// <summary>
+        /// Example CartData DB add
+        /// </summary>
         public void CartData()
         {
             var options = new DbContextOptionsBuilder<CartDbContext>()
@@ -20,12 +23,12 @@ namespace CicekSepetiCaseStudy.Data.Context
             {
                 //New Cart 
                 Cart cart;
-                Product product;
+                CartItem product;
 
                 cart = new Cart();
                 cart.CartGuid = new Guid();
                 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 1,
                     Name = "ball",
@@ -33,10 +36,9 @@ namespace CicekSepetiCaseStudy.Data.Context
                     Price = (decimal)10.99,
                     CreateByUser = "1",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
                 };
 
-                cart.Products.Add(product);
+                cart.CartItems.Add(product);
 
                 context.Cart.Add(cart);
 
@@ -45,7 +47,7 @@ namespace CicekSepetiCaseStudy.Data.Context
                 cart = new Cart();
                 cart.CartGuid = new Guid();
                 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 2,
                     Name = "Tennis Racket",
@@ -53,10 +55,9 @@ namespace CicekSepetiCaseStudy.Data.Context
                     Price = (decimal)20.99,
                     CreateByUser = "2",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
                 };
 
-                cart.Products.Add(product);
+                cart.CartItems.Add(product);
 
                 context.Cart.Add(cart);
 
@@ -64,7 +65,7 @@ namespace CicekSepetiCaseStudy.Data.Context
                 //New Cart 
                 cart = new Cart();
                 cart.CartGuid = new Guid();
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 3,
                     Name = "T-Shirt",
@@ -72,10 +73,9 @@ namespace CicekSepetiCaseStudy.Data.Context
                     Price = (decimal)14.99,
                     CreateByUser = "3",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
-                    IsActive = true
                 };
 
-                cart.Products.Add(product);
+                cart.CartItems.Add(product);
 
                 context.Cart.Add(cart);
 
@@ -83,6 +83,10 @@ namespace CicekSepetiCaseStudy.Data.Context
                 context.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Example Product DB add
+        /// </summary>
         public void ProductData()
         {
             var options = new DbContextOptionsBuilder<ProductDbContext>()
@@ -90,15 +94,14 @@ namespace CicekSepetiCaseStudy.Data.Context
                              .Options;
             using (var context = new ProductDbContext(options))
             {
-                Product product;
+                CartItem product;
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 1,
                     Name = "ball",
                     Description = "sports goods are sold",
                     Price = (decimal)10.99,
-                    IsActive = true,
                     CreateByUser = "1",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
@@ -106,13 +109,12 @@ namespace CicekSepetiCaseStudy.Data.Context
                 context.Products.Add(product);
 
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 2,
                     Name = "Tennis Racket",
                     Description = "sports goods are sold",
                     Price = (decimal)20.99,
-                    IsActive = true,
                     CreateByUser = "2",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
@@ -120,13 +122,12 @@ namespace CicekSepetiCaseStudy.Data.Context
                 context.Products.Add(product);
 
 
-                product = new Product()
+                product = new CartItem()
                 {
                     Id = 3,
                     Name = "T-Shirt",
                     Description = "black T-Shirt",
                     Price = (decimal)14.99,
-                    IsActive = true,
                     CreateByUser = "3",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
@@ -136,55 +137,5 @@ namespace CicekSepetiCaseStudy.Data.Context
                 context.SaveChanges();               
             }
         }
-
-
-        public void StockProductData()
-        {
-            var options = new DbContextOptionsBuilder<StockDbContext>()
-                             .UseInMemoryDatabase("stockDB")
-                             .Options;
-            using (var context = new StockDbContext(options))
-            {
-                Stock stock;
-
-                stock = new Stock
-                {
-                    Id=1,
-                    ProductId=1,
-                    Quantity=3,
-                    CreateByUser = "10",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                };
-
-                context.Stock.Add(stock);
-
-
-                stock = new Stock
-                {
-                    Id = 2,
-                    ProductId = 5,
-                    Quantity = 352,
-                    CreateByUser = "22",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                };
-
-                context.Stock.Add(stock);
-                
-                
-                stock = new Stock
-                {
-                    Id = 3,
-                    ProductId = 85,
-                    Quantity = 84,
-                    CreateByUser = "60",// will be user id or uniq username
-                    CreateDateTime = DateTime.UtcNow,
-                };
-
-                context.Stock.Add(stock);
-
-                context.SaveChanges();
-            }
-        }
-
     }
 }

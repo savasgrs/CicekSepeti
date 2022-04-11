@@ -8,13 +8,13 @@ namespace CicekSepeti.Data.Repository.Abstraction
 {
     public interface IProductRepository
     {
-        Task<List<Product>> GetAllProduct();
-        Task<Product> GetProduct(int productId);
+        Task<List<CartItem>> GetAllProduct();
+        Task<CartItem> GetProduct(int productId);
 
-        Task<Product> AddProduct(Product product);
+        Task<CartItem> AddProduct(CartItem product);
 
-        Task<Product> UpdateProduct(Product product);
+        Task<CartItem> UpdateProduct(CartItem product);
 
-        Task<Product> DeleteProduct(int productId);
+        Task<CartItem> DeleteProduct(int productId);
     }
 }

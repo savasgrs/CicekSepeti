@@ -13,64 +13,47 @@ namespace CicekSepeti.Domain.Handlers.CommandHandlers
     {
 
         private readonly ICartRepository _cartRepository;
-        private readonly IStockRepository _stockRepository;
         private readonly IProductRepository _productRepository;
 
-        public AddToCartCommandHandler(ICartRepository cartRepository, IStockRepository stockRepository, IProductRepository productRepository)
+        public AddToCartCommandHandler(ICartRepository cartRepository,IProductRepository productRepository)
         {
             _cartRepository = cartRepository;
-            _stockRepository = stockRepository;
             _productRepository = productRepository;
         }
 
         public async Task<Cart> Handle(AddToCartRequest command, CancellationToken cancellationToken)
         {
-            var products = command.Cart.Products.Where(d => d.Id == command.ProductId).ToList();
-
-            var stockProduct = await _stockRepository.GetStock(command.ProductId);
-
-
-            //stock control
-            if (stockProduct.Quantity == 0)
-                return default;
-
-            if (products.Count() == stockProduct.Quantity)
-                return default;
-            
-            
-            var responsepProduct = await _productRepository.GetProduct(stockProduct.ProductId);
+            //get CartItems
+            var cart = await _cartRepository.GetCart(command.CartGuid);
+            CartItem product;
 
 
-            var cart = await _cartRepository.GetCart(command.Cart.CartGuid.ToString());
-
-            if (cart == null) // very first time adding the product to cart
+            if (cart != null)
             {
+                //if exist product
+                product = cart.CartItems.Where(d => d.Id == command.ProductId).FirstOrDefault();
+                product.Quantity++;
+            }
+            else// very first time adding the product to cart
+            {
+                //new CartItem add
                 cart = new Cart();
                 cart.CartGuid = Guid.NewGuid();
 
-                Product product;
-
-                product = new Product()
-                {
-                    Id = command.ProductId,
-                    Name = responsepProduct.Name,
-                    Description = responsepProduct.Description,
-                    Price = responsepProduct.Price,
-                    IsActive = responsepProduct.IsActive
-                };
-
-                cart.Products.Add(product);
+                product = await _productRepository.GetProduct(command.ProductId);
+                                
+                cart.CartItems.Add(product);
 
                 await _cartRepository.AddCart(cart);
             }
-            else  // increment the amount of existing product in cart
+
+
+            foreach (CartItem productItem in cart.CartItems)
             {
-                foreach (Product productItem in products)
-                {
-                    cart.Amount += productItem.Price;
-                }
-                await _cartRepository.AddCart(cart);
+                cart.Amount += productItem.Price;
             }
+            await _cartRepository.AddCart(cart);
+
             return cart;
         }
     }

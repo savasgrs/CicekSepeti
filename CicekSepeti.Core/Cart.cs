@@ -9,11 +9,11 @@ namespace CicekSepeti.Core
     {
         public Cart()
         {
-            Products = new List<Product>();
+            CartItems = new List<CartItem>();
         }
         [Key]
         public Guid CartGuid { get; set; }
-        public List<Product> Products { get; set; }
+        public List<CartItem> CartItems { get; set; }
         public decimal Amount { get; set; }
     }
 }

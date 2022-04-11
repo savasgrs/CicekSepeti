@@ -1,15 +1,10 @@
 ﻿using CicekSepeti.Core;
 using CicekSepetiCaseStudy.Api.Const;
-using CicekSepetiCaseStudy.Core.Models;
-using CicekSepetiCaseStudy.Data.CQRS.Commands.Request;
-using CicekSepetiCaseStudy.Data.CQRS.Queries.Request;
-using CicekSepetiCaseStudy.Data.Services.StrockService;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CicekSepetiCaseStudy.Controllers
@@ -19,13 +14,11 @@ namespace CicekSepetiCaseStudy.Controllers
     public class CartController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IStockService _stockService;
         private readonly ILogger _logger;
         private string className;
-        public CartController(IMediator mediator, IStockService stockService, ILogger<CartController> logger)
+        public CartController(IMediator mediator, ILogger<CartController> logger)
         {
             _mediator = mediator;
-            _stockService = stockService;
             _logger = logger;
             className = this.GetType().Name + " ";
         }

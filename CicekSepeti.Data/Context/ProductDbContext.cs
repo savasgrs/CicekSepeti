@@ -13,6 +13,6 @@ namespace CicekSepetiCaseStudy.Data.Context
         {
         }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<CartItem> Products { get; set; }
     }
 }
