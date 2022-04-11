@@ -63,11 +63,10 @@ namespace CicekSepeti.Data.Repository
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<Cart> UpdateCart(Cart cart)
+        public async Task<int> UpdateCart(Cart cart)
         {
             _context.Cart.Update(cart);
-            await _context.SaveChangesAsync();
-            return cart;
+            return await _context.SaveChangesAsync();
         }
     }
 }

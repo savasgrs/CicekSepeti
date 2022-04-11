@@ -13,7 +13,7 @@ namespace CicekSepeti.Data.Repository.Abstraction
 
         Task<Cart> AddCart(Cart cart);
 
-        Task<Cart> UpdateCart(Cart cart);
+        Task<int> UpdateCart(Cart cart);
 
         Task<Cart> DeleteCart(Guid cartId);
 

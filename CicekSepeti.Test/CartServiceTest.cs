@@ -128,8 +128,8 @@ namespace CicekSepeti.Test
                 testCartProduct.Quantity = 1;
                 testCartProduct.CartItemId = product.Id;
 
-                context.Cart.Add(testCartProduct);
-                context.SaveChanges();
+                //context.Cart.Add(testCartProduct);
+                //context.SaveChanges();
             }
 
             using (var context = new CartDbContext(options))
