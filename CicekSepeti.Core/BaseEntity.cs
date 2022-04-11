@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CicekSepetiCaseStudy.Core.Models.Product
+namespace CicekSepeti.Core.Models.Product
 {
     public class BaseEntity
     {

@@ -1,7 +1,7 @@
 ﻿using CicekSepeti.Core;
 using CicekSepeti.Data.Repository;
-using CicekSepetiCaseStudy.Core.Models;
-using CicekSepetiCaseStudy.Data.Context;
+using CicekSepeti.Core.Models;
+using CicekSepeti.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CicekSepetiCaseStudy.Test
+namespace CicekSepeti.Test
 {
     [TestClass]
     public class CartServiceTest
@@ -22,7 +22,7 @@ namespace CicekSepetiCaseStudy.Test
             decimal testAmount = (decimal)10.99;
 
             var options = new DbContextOptionsBuilder<CartDbContext>()
-                             .UseInMemoryDatabase("testCartDb1")
+                             .UseInMemoryDatabase("testCartDb")
                              .Options;
             using (var context = new CartDbContext(options))
             {
@@ -30,9 +30,8 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                CartItem product;
 
-                product = new CartItem()
+                CartItem product = new CartItem()
                 {
                     Id = 1,
                     Name = "ball",
@@ -63,7 +62,7 @@ namespace CicekSepetiCaseStudy.Test
             decimal testAmount = (decimal)1110.99;
 
             var options = new DbContextOptionsBuilder<CartDbContext>()
-                             .UseInMemoryDatabase("test_cart_db_2")
+                             .UseInMemoryDatabase("testCartDb2")
                              .Options;
             using (var context = new CartDbContext(options))
             {
@@ -100,14 +99,14 @@ namespace CicekSepetiCaseStudy.Test
         }
 
         [TestMethod]
-        public void AddProductToCartAsyncTest()
+        public void AddToCartCommandHandlerTest()
         {
             Guid testGuid = new Guid();
             Cart testCartProduct;
             decimal testAmount = (decimal)10.99;
 
             var options = new DbContextOptionsBuilder<CartDbContext>()
-                             .UseInMemoryDatabase("test_cart_db_3")
+                             .UseInMemoryDatabase("testCartDb3")
                              .Options;
             using (var context = new CartDbContext(options))
             {
@@ -115,9 +114,8 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                CartItem product;
 
-                product = new CartItem()
+                CartItem product = new CartItem()
                 {
                     Id = 3,
                     Name = "T-Shirt",
@@ -148,7 +146,7 @@ namespace CicekSepetiCaseStudy.Test
             Cart testCartProduct;
 
             var options = new DbContextOptionsBuilder<CartDbContext>()
-                             .UseInMemoryDatabase("test_cart_db_4")
+                             .UseInMemoryDatabase("testCartDb4")
                              .Options;
             using (var context = new CartDbContext(options))
             {
@@ -156,9 +154,8 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                CartItem product;
 
-                product = new CartItem()
+                CartItem product = new CartItem()
                 {
                     Id = 4,
                     Name = "suit",
@@ -190,7 +187,7 @@ namespace CicekSepetiCaseStudy.Test
             Cart testCartProduct;
 
             var options = new DbContextOptionsBuilder<CartDbContext>()
-                             .UseInMemoryDatabase("test_cart_db_5")
+                             .UseInMemoryDatabase("testCartDb5")
                              .Options;
             using (var context = new CartDbContext(options))
             {
@@ -198,9 +195,8 @@ namespace CicekSepetiCaseStudy.Test
                 testCartProduct.CartGuid = testGuid;
                 testCartProduct.Amount = testAmount;
 
-                CartItem product;
 
-                product = new CartItem()
+                CartItem product = new CartItem()
                 {
                     Id = 5,
                     Name = "ball",

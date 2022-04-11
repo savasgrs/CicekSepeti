@@ -1,11 +1,11 @@
 ﻿using CicekSepeti.Core;
-using CicekSepetiCaseStudy.Core.Models;
+using CicekSepeti.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CicekSepetiCaseStudy.Data.Context
+namespace CicekSepeti.Data.Context
 {
     public class MockDatas
     {
@@ -17,7 +17,6 @@ namespace CicekSepetiCaseStudy.Data.Context
             var options = new DbContextOptionsBuilder<CartDbContext>()
                              .UseInMemoryDatabase("cartDB")
                              .Options;
-
 
             using (var context = new CartDbContext(options))
             {
@@ -37,6 +36,8 @@ namespace CicekSepetiCaseStudy.Data.Context
                     CreateByUser = "1",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
+                cart.Quantity++;
+                cart.Amount = (decimal)10.99;
 
                 cart.CartItems.Add(product);
 
@@ -56,6 +57,8 @@ namespace CicekSepetiCaseStudy.Data.Context
                     CreateByUser = "2",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
+                cart.Quantity++;
+                cart.Amount = (decimal)20.99;
 
                 cart.CartItems.Add(product);
 
@@ -68,14 +71,30 @@ namespace CicekSepetiCaseStudy.Data.Context
                 product = new CartItem()
                 {
                     Id = 3,
-                    Name = "T-Shirt",
-                    Description = "black T-Shirt",
-                    Price = (decimal)14.99,
+                    Name = "T-Shirt black",
+                    Description = "T-Shirt",
+                    Price = (decimal)13,
                     CreateByUser = "3",// will be user id or uniq username
                     CreateDateTime = DateTime.UtcNow,
                 };
+                cart.Quantity++;
+
+                //New Cart 
+                cart.CartGuid = new Guid();
+                product = new CartItem()
+                {
+                    Id = 3,
+                    Name = "T-Shirt re",
+                    Description = "T-Shirt",
+                    Price = (decimal)17,
+                    CreateByUser = "3",// will be user id or uniq username
+                    CreateDateTime = DateTime.UtcNow,
+                };
+                cart.Quantity++;
+                cart.Amount = (decimal)30;
 
                 cart.CartItems.Add(product);
+
 
                 context.Cart.Add(cart);
 
@@ -92,6 +111,7 @@ namespace CicekSepetiCaseStudy.Data.Context
             var options = new DbContextOptionsBuilder<ProductDbContext>()
                              .UseInMemoryDatabase("productDB")
                              .Options;
+
             using (var context = new ProductDbContext(options))
             {
                 CartItem product;

@@ -1,11 +1,11 @@
 ﻿using CicekSepeti.Core;
-using CicekSepetiCaseStudy.Core.Models;
+using CicekSepeti.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CicekSepetiCaseStudy.Data.Context
+namespace CicekSepeti.Data.Context
 {
     public class CartDbContext : DbContext
     {

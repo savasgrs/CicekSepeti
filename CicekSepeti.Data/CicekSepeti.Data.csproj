@@ -14,8 +14,4 @@
     <ProjectReference Include="..\CicekSepeti.Core\CicekSepeti.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Response Model\" />
-  </ItemGroup>
-
 </Project>

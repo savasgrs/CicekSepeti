@@ -1,6 +1,6 @@
 ﻿using CicekSepeti.Core;
 using CicekSepeti.Data.Repository.Abstraction;
-using CicekSepetiCaseStudy.Data.Context;
+using CicekSepeti.Data.Context;
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;

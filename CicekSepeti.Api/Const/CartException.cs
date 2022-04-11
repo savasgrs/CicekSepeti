@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CicekSepetiCaseStudy.Api.Const
+namespace CicekSepeti.Api.Const
 {
     public static class CartException
     {

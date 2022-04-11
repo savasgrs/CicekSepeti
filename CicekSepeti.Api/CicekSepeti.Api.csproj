@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CicekSepeti.Data\CicekSepeti.Data.csproj" />
+    <ProjectReference Include="..\CicekSepeti.Domain\CicekSepeti.Domain.csproj" />
   </ItemGroup>
 
 

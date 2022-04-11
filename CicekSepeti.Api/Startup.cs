@@ -1,17 +1,15 @@
-using CicekSepetiCaseStudy.Data.Context;
+using CicekSepeti.Data.Context;
+using CicekSepeti.Data.Queries.Request;
+using CicekSepeti.Data.Repository;
+using CicekSepeti.Data.Repository.Abstraction;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MediatR;
+using System.Reflection;
 
 namespace CicekSepeti.Api
 {
@@ -31,15 +29,15 @@ namespace CicekSepeti.Api
                                                 opt.UseInMemoryDatabase(
                                                     databaseName: "cartDB"
                                                     ));
-            services.AddDbContext<StockDbContext>(opt =>
+            services.AddDbContext<ProductDbContext>(opt =>
                                                  opt.UseInMemoryDatabase(
                                                      databaseName: "productDB"
                                                      ));
-            services.AddDbContext<StockDbContext>(opt =>
-                                                opt.UseInMemoryDatabase(
-                                                    databaseName: "stockDB"
-                                                    ));
 
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddMediatR(typeof(GetAllCartQuery).GetTypeInfo().Assembly);
             services.AddControllers();
         }
 
