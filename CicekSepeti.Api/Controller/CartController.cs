@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CicekSepeti.Data.Models.RequestModel;
 
 namespace CicekSepeti.Controllers
 {
@@ -16,20 +17,18 @@ namespace CicekSepeti.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
-        private string className;
         public CartController(IMediator mediator, ILogger<CartController> logger)
         {
             _mediator = mediator;
             _logger = logger;
-            className = this.GetType().Name + " ";
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCart()
+        public async Task<IActionResult> Get()
         {
             try
             {
-                _logger.LogInformation(className + CartException.GetAllProductList);
+                _logger.LogInformation(nameof(CartController) + CartException.GetAllProductList);
 
                 GetAllCartQuery queryModel = new GetAllCartQuery();
 
@@ -38,83 +37,47 @@ namespace CicekSepeti.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(className + CartException.GetAllProductList + ex);
+                _logger.LogError(nameof(CartController) + CartException.GetAllProductList + ex);
 
-                throw new Exception(CartException.GetAllProductList + ex);
+                return BadRequest(CartException.GetAllProductList);
             }
 
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> Get(int id)
-        //{
-        //    try
-        //    {
-        //        GetProductByIdQuery queryModel = new GetProductByIdQuery
-        //        {
-        //            id = id
-        //        };
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] AddToCartRequest commandModel)
+        {
+            try
+            {
+                Cart cart = await _mediator.Send(commandModel);
 
-        //        Cart product = await _mediator.Send(queryModel);
+                return Ok(cart);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(nameof(CartController) + CartException.CheckStockAmount + ex.Message);
 
-        //        return Ok(product);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(className + CartException.GetProductList + ex);
+                return BadRequest(CartException.CheckStockAmount);
+            }
 
-        //        throw new Exception(className + CartException.GetProductList + ex);
-        //    }
+        }
 
-        //}
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] RemoveFromCartCommand commandModel)
+        {
+            try
+            {
+                int result = await _mediator.Send(commandModel);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(nameof(CartController) + CartException.Delete + ex.Message);
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post([FromBody] AddToCartCommand commandModel)
-        //{
-        //    try
-        //    {
+                return BadRequest(CartException.Delete);
+            }
 
-        //        int stockAmount = await _stockService.CheckStockAmount(commandModel.productId);
-
-        //        if (stockAmount == 0)
-        //            return BadRequest("No exist stock");
-        //        if (stockAmount < commandModel.amount)
-        //            return BadRequest("Max Product amount" + stockAmount);
-        //        if (commandModel.amount <= 0)
-        //            return BadRequest("An error occured.");
-
-        //        Cart product = await _mediator.Send(commandModel);
-
-        //        if (product == null)
-        //            return BadRequest("Product amount in your cart cannot exceed " + stockAmount);
-
-        //        return Ok(product);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(className + CartException.CheckStockAmount + ex);
-
-        //        throw new Exception(className + CartException.CheckStockAmount + ex);
-        //    }
-
-        //}
-
-        //[HttpDelete]
-        //public async Task<IActionResult> Delete([FromBody] RemoveFromCartCommand commandModel)
-        //{
-        //    try
-        //    {
-        //        int result = await _mediator.Send(commandModel);
-        //        return Ok(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(className + CartException.Delete + ex);
-
-        //        throw new Exception(className + CartException.Delete + ex);
-        //    }
-
-        //}
+        }
 
     }
 }

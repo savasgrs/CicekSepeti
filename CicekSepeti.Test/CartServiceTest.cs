@@ -21,11 +21,11 @@ namespace CicekSepeti.Test
             Guid testGuid = new Guid();
             decimal testAmount = (decimal)10.99;
 
-            var options = new DbContextOptionsBuilder<CartDbContext>()
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
                              .UseInMemoryDatabase("testCartDb")
                              .Options;
 
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 testCartProduct = new Cart();
                 testCartProduct.CartGuid = testGuid;
@@ -48,7 +48,7 @@ namespace CicekSepeti.Test
                 context.Cart.Add(testCartProduct);
                 context.SaveChanges();
             }
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.GetCart(testCartProduct.CartGuid).Result.CartGuid, testCartProduct.CartGuid);
@@ -63,10 +63,10 @@ namespace CicekSepeti.Test
             Cart testCartProduct;
             decimal testAmount = (decimal)1110.99;
 
-            var options = new DbContextOptionsBuilder<CartDbContext>()
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
                              .UseInMemoryDatabase("testCartDb2")
                              .Options;
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
 
                 testCartProduct = new Cart();
@@ -90,7 +90,7 @@ namespace CicekSepeti.Test
                 context.SaveChanges();
             }
 
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.GetAllCart().Result.Count(), context.Cart.Count());
@@ -105,10 +105,10 @@ namespace CicekSepeti.Test
             Cart testCartProduct;
             decimal testAmount = (decimal)11.99;
 
-            var options = new DbContextOptionsBuilder<CartDbContext>()
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
                              .UseInMemoryDatabase("testCartDb3")
                              .Options;
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 testCartProduct = new Cart();
                 testCartProduct.CartGuid = testGuid;
@@ -132,7 +132,7 @@ namespace CicekSepeti.Test
                 //context.SaveChanges();
             }
 
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.AddCart(testCartProduct).Result, testCartProduct);
@@ -147,10 +147,10 @@ namespace CicekSepeti.Test
             Guid testGuid = new Guid();
             Cart testCartProduct;
 
-            var options = new DbContextOptionsBuilder<CartDbContext>()
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
                              .UseInMemoryDatabase("testCartDb4")
                              .Options;
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 testCartProduct = new Cart();
                 testCartProduct.CartGuid = testGuid;
@@ -174,7 +174,7 @@ namespace CicekSepeti.Test
                 context.SaveChanges();
             }
 
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.UpdateCart(testCartProduct).Result, 1);
@@ -190,10 +190,10 @@ namespace CicekSepeti.Test
             Guid testGuid = new Guid();
             Cart testCartProduct;
 
-            var options = new DbContextOptionsBuilder<CartDbContext>()
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
                              .UseInMemoryDatabase("testCartDb5")
                              .Options;
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 testCartProduct = new Cart();
                 testCartProduct.CartGuid = testGuid;
@@ -218,12 +218,11 @@ namespace CicekSepeti.Test
                 context.SaveChanges();
             }
 
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 CartRepository cartService = new CartRepository(context);
                 Assert.AreEqual(cartService.DeleteCart(testCartProduct.CartGuid).Result, 1);
-                Assert.AreEqual(cartService.GetAllCart().Result.Count(), 0);
-                Assert.AreNotEqual(cartService.GetAllCart().Result.Count(), 1);
+                Assert.AreEqual(cartService.GetAllCart().Result.Count(), context.Cart.Count());
             }
         }
     }

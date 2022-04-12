@@ -1,5 +1,4 @@
 ﻿using CicekSepeti.Core;
-using CicekSepeti.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,13 +6,15 @@ using System.Text;
 
 namespace CicekSepeti.Data.Context
 {
-    public class CartDbContext : DbContext
+    public class ECommerceDBContext : DbContext
     {
-        public CartDbContext(DbContextOptions<CartDbContext> options) : base(options)
+        public ECommerceDBContext(DbContextOptions<ECommerceDBContext> options) : base(options)
         {
         }
 
         public DbSet<Cart> Cart { get; set; }
+        public DbSet<CartItem> Products { get; set; }
+        public DbSet<Stock> Stock { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

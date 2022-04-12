@@ -26,10 +26,7 @@ namespace CicekSepeti.Domain.Handlers.CommandHandlers
 
             var product = await _productRepository.GetProduct(command.ProductId);
 
-            Core.Cart deletedCart= await _cartRepository.DeleteCart(command.CartGuid);
-
-            return deletedCart.Id;
-
+            return await _cartRepository.DeleteCart(command.CartGuid);
         }
     }
 }

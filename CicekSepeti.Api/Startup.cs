@@ -25,17 +25,15 @@ namespace CicekSepeti.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CartDbContext>(opt =>
+            services.AddDbContext<ECommerceDBContext>(opt =>
                                                 opt.UseInMemoryDatabase(
                                                     databaseName: "cartDB"
                                                     ));
-            services.AddDbContext<ProductDbContext>(opt =>
-                                                 opt.UseInMemoryDatabase(
-                                                     databaseName: "productDB"
-                                                     ));
 
-            services.AddScoped<ICartRepository, CartRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddTransient<ICartRepository, CartRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IStockRepository, StockRepository>();
+
 
             services.AddMediatR(typeof(GetAllCartQuery).GetTypeInfo().Assembly);
             services.AddControllers();

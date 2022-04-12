@@ -12,9 +12,9 @@ namespace CicekSepeti.Data.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        public readonly ProductDbContext _context;
+        public readonly ECommerceDBContext _context;
 
-        public ProductRepository(ProductDbContext context)
+        public ProductRepository(ECommerceDBContext context)
         {
             _context = context;
         }
@@ -42,7 +42,7 @@ namespace CicekSepeti.Data.Repository
                 _context.Remove(product);
 
                 // Save DB changes
-                _context.SaveChanges();
+                await  _context.SaveChangesAsync();
             }
             return product;
         }

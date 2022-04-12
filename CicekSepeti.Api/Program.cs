@@ -10,11 +10,18 @@ namespace CicekSepeti.Api
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
-            MockDatas mockDatas = new MockDatas();
-            mockDatas.ProductData();
-            mockDatas.CartData();
+            
+            GenerateMockData();
+            
             host.Run();
+        }
+
+        private static void GenerateMockData()
+        {
+            MockData mockData = new MockData();
+            mockData.ProductData();
+            mockData.CartData();
+            mockData.StockData();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

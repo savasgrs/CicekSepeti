@@ -12,9 +12,9 @@ namespace CicekSepeti.Data.Repository
 {
     public class CartRepository : ICartRepository
     {
-        public readonly CartDbContext _context;
+        public readonly ECommerceDBContext _context;
 
-        public CartRepository(CartDbContext context)
+        public CartRepository(ECommerceDBContext context)
         {
             _context = context;
         }
@@ -33,7 +33,7 @@ namespace CicekSepeti.Data.Repository
             return cart;
         }
 
-        public async Task<Cart> DeleteCart(Guid cartId)
+        public async Task<int> DeleteCart(Guid cartId)
         {
             Cart cart = await _context.Cart.FindAsync(cartId);
             if (cart != null)
@@ -42,9 +42,8 @@ namespace CicekSepeti.Data.Repository
                 _context.Remove(cart);
 
                 // Save DB changes
-                _context.SaveChanges();
             }
-            return cart;
+            return await _context.SaveChangesAsync(); ;
         }
 
         public async Task<List<Cart>> GetAllCart()

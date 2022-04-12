@@ -15,9 +15,8 @@ namespace CicekSepeti.Data.Repository.Abstraction
 
         Task<int> UpdateCart(Cart cart);
 
-        Task<Cart> DeleteCart(Guid cartId);
+        Task<int> DeleteCart(Guid cartId);
 
         Task<int> SaveChangesAsync();
-
     }
 }

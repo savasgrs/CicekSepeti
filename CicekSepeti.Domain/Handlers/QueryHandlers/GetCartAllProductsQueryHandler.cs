@@ -24,5 +24,4 @@ namespace CicekSepeti.Domain.Handlers.QueryHandlers
             return await _cartRepository.GetAllCart();
         }
     }
-
 }

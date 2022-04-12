@@ -7,18 +7,18 @@ using System.Text;
 
 namespace CicekSepeti.Data.Context
 {
-    public class MockDatas
+    public class MockData
     {
         /// <summary>
         /// Example CartData DB add
         /// </summary>
         public void CartData()
         {
-            var options = new DbContextOptionsBuilder<CartDbContext>()
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
                              .UseInMemoryDatabase("cartDB")
                              .Options;
 
-            using (var context = new CartDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 //New Cart 
                 Cart cart;
@@ -107,11 +107,11 @@ namespace CicekSepeti.Data.Context
         /// </summary>
         public void ProductData()
         {
-            var options = new DbContextOptionsBuilder<ProductDbContext>()
-                             .UseInMemoryDatabase("productDB")
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
+                             .UseInMemoryDatabase("cartDB")
                              .Options;
 
-            using (var context = new ProductDbContext(options))
+            using (var context = new ECommerceDBContext(options))
             {
                 CartItem product;
 
@@ -154,6 +154,45 @@ namespace CicekSepeti.Data.Context
                 context.Products.Add(product);
 
                 context.SaveChanges();               
+            }
+        }
+
+        /// <summary>
+        /// Example Stock DB add
+        /// </summary>
+        public void StockData()
+        {
+            var options = new DbContextOptionsBuilder<ECommerceDBContext>()
+                             .UseInMemoryDatabase("cartDB")
+                             .Options;
+            using (var context = new ECommerceDBContext(options))
+            {
+
+                Stock stock = new Stock
+                {
+                    ProductId = 1,
+                    StockQuantity=3
+                };
+
+                context.Stock.Add(stock);
+
+                Stock stock1 = new Stock
+                {
+                    ProductId = 2,
+                    StockQuantity = 6
+                };
+
+                context.Stock.Add(stock1);
+
+                Stock stock2 = new Stock
+                {
+                    ProductId = 3,
+                    StockQuantity = 1
+                };
+
+                context.Stock.Add(stock2);
+
+                context.SaveChanges();
             }
         }
     }
